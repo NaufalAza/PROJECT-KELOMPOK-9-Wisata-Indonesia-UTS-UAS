@@ -1,0 +1,82 @@
+.kategori-hero {
+  background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
+  color: white;
+  padding: 60px 0;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.kategori-hero h1 {
+  font-size: 38px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.kategori-hero p {
+  opacity: 0.9;
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.kategori-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 80px;
+}
+
+.kategori-card {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 35px 24px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.kategori-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-light);
+}
+
+.kategori-icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  margin: 0 auto 20px;
+  transition: var(--transition);
+}
+
+.kategori-card:hover .kategori-icon-circle {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Specific circle backgrounds matching design colors */
+.bg-circle-pantai { background-color: rgba(14, 165, 233, 0.15); color: #0284c7; }
+.bg-circle-gunung { background-color: rgba(16, 185, 129, 0.15); color: #059669; }
+.bg-circle-budaya { background-color: rgba(239, 68, 68, 0.15); color: #dc2626; }
+.bg-circle-alam { background-color: rgba(34, 197, 94, 0.15); color: #16a34a; }
+.bg-circle-kuliner { background-color: rgba(245, 158, 11, 0.15); color: #d97706; }
+.bg-circle-kota { background-color: rgba(139, 92, 246, 0.15); color: #7c3aed; }
+
+.kategori-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-heading);
+  margin-bottom: 8px;
+}
+
+.kategori-count {
+  font-size: 14px;
+  color: var(--text-light);
+  font-weight: 700;
+  text-transform: uppercase;
+}
