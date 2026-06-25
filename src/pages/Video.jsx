@@ -4,22 +4,22 @@ import "../styles/video.css";
 function Video() {
   const [videos, setVideos] = useState([
     {
-      judul: "BROMO",
-      tag: "Official Tourism Video",
-      link: "https://www.youtube.com/embed/tffsEhpyjng",
-      desc: "Menyaksikan Keindahan Pemandangan Gunung Bromo."
+      judul: "Bromo Sunrise Majesty",
+      tag: "Gunung",
+      link: "/videos/Bromo.mp4",
+      desc: "Pemandangan menakjubkan matahari terbit di atas kaldera Gunung Bromo."
     },
     {
-      judul: "Raja Ampat",
-      tag: "Nature & Diving",
-      link: "https://www.youtube.com/embed/PgrGHs0U2Zs",
-      desc: "Menyaksikan langsung petualangan menyelam di kepulauan karst Raja Ampat, pusat segitiga terumbu karang dunia dengan biota laut yang melimpah."
+      judul: "Raja Ampat Underwater Heaven",
+      tag: "Diving",
+      link: "/videos/Raja Empat.mp4",
+      desc: "Menyusuri keindahan bawah laut Raja Ampat."
     },
     {
-      judul: "Bali",
-      tag: "Culture & Beach",
-      link: "https://www.youtube.com/embed/9mcEpVFOm-g",
-      desc: "Jelajahi keindahan pura suci, sawah terasering Jatiluwih yang hijau, serta keindahan tebing laut Pantai Kelingking di Nusa Penida."
+      judul: "Bali Cinematic Tour",
+      tag: "Pantai",
+      link: "/videos/Bali.mp4",
+      desc: "Video keindahan pantai dan kebudayaan di Bali."
     }
   ]);
 
