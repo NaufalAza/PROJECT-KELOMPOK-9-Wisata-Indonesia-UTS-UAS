@@ -1,7 +1,4 @@
 import { useState, useEffect } from "react";
-import bali from "../assets/bali.jpg";
-import rj4 from "../assets/rj4.jpg";
-import bromo from "../assets/bromo.jpg";
 import "../styles/gallery.css";
 
 function Gallery() {
@@ -11,17 +8,17 @@ function Gallery() {
     {
       nama: "Keindahan Pantai Uluwatu",
       lokasi: "Bali, Indonesia",
-      gambar: bali
+      gambar: "/Galeri/Bali.jpg"
     },
     {
       nama: "Gugusan Karang Wayag",
       lokasi: "Raja Ampat, Papua Barat",
-      gambar: rj4
+      gambar: "/Galeri/Raja Ampat.jpg"
     },
     {
       nama: "Kawah Gunung Bromo",
       lokasi: "Jawa Timur, Indonesia",
-      gambar: bromo
+      gambar: "/Galeri/Bromo.jpeg"
     },
   ]);
 

@@ -184,8 +184,8 @@ INSERT INTO video (judul, tag, link, `desc`, destination_id) VALUES
 ('Bali Cinematic Tour', 'Pantai', '/videos/Bali.mp4', 'Video keindahan pantai dan kebudayaan di Bali.', 'bali'),
 ('Raja Ampat Underwater Heaven', 'Diving', '/videos/Raja Empat.mp4', 'Menyusuri keindahan bawah laut Raja Ampat.', 'raja-ampat'),
 ('Bromo Sunrise Majesty', 'Gunung', '/videos/Bromo.mp4', 'Pemandangan menakjubkan matahari terbit di atas kaldera Gunung Bromo.', 'bromo');
-
 -- Insert Gallery
 INSERT INTO gallery (nama, lokasi, gambar, destination_id) VALUES
-('Sunset Pantai Kuta', 'Bali', 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=500', 'bali'),
-('Gugusan Karst Raja Ampat', 'Papua Barat', 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?q=80&w=500', 'raja-ampat');
+('Keindahan Pantai Uluwatu', 'Bali, Indonesia', '/Galeri/Bali.jpg', 'bali'),
+('Gugusan Karang Wayag', 'Raja Ampat, Papua Barat', '/Galeri/Raja Ampat.jpg', 'raja-ampat'),
+('Kawah Gunung Bromo', 'Jawa Timur, Indonesia', '/Galeri/Bromo.jpeg', 'bromo');
