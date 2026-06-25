@@ -7,6 +7,8 @@ function Dashboard() {
   const [currentUser, setCurrentUser] = useState(null);
   const [favoritesCount, setFavoritesCount] = useState(0);
   const [watchedVideosCount, setWatchedVideosCount] = useState(0);
+  const [viewedDestinationsCount, setViewedDestinationsCount] = useState(0);
+  const [testimonialsCount, setTestimonialsCount] = useState(0);
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,6 +33,13 @@ function Dashboard() {
           setFavoritesCount(favs.length);
         }
 
+        // Fetch testimonials to get count
+        const testRes = await fetch(`${apiUrl}/testimoni?userId=${user.id}`);
+        if (testRes.ok) {
+          const tests = await testRes.json();
+          setTestimonialsCount(tests.length);
+        }
+
         // Fetch recent activities
         const actRes = await fetch(`${apiUrl}/riwayat?userId=${user.id}`);
         if (actRes.ok) {
@@ -39,6 +48,10 @@ function Dashboard() {
           // Count video play activities
           const videoCount = acts.filter(item => item.icon === 'video' || item.title.startsWith("Menonton Video")).length;
           setWatchedVideosCount(videoCount);
+
+          // Count viewed destinations
+          const viewCount = acts.filter(item => item.icon === 'eye' || item.title.startsWith("Melihat destinasi")).length;
+          setViewedDestinationsCount(viewCount);
 
           // Map to match the dashboard item format
           const mapped = acts.slice(0, 3).map(item => ({
@@ -69,6 +82,8 @@ function Dashboard() {
         return <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>;
       case 'video':
         return <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#86198f' }}><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>;
+      case 'eye':
+        return <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#0ea5e9' }}><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>;
       default:
         return <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>;
     }
@@ -77,7 +92,7 @@ function Dashboard() {
   const stats = [
     {
       label: "Destinasi Dilihat",
-      value: 3,
+      value: viewedDestinationsCount,
       icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>,
       badgeClass: "badge-dilihat"
     },
@@ -95,7 +110,7 @@ function Dashboard() {
     },
     {
       label: "Testimoni Kamu",
-      value: 1,
+      value: testimonialsCount,
       icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
       badgeClass: "badge-testimoni"
     }

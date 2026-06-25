@@ -385,6 +385,12 @@ app.post('/api/riwayat', async (req, res) => {
       return res.status(400).json({ error: 'userId dan title wajib diisi!' });
     }
 
+    // Check if user exists to prevent foreign key errors
+    const [user] = await pool.execute('SELECT id FROM users WHERE id = ?', [userId]);
+    if (user.length === 0) {
+      return res.status(400).json({ error: 'User tidak valid atau sesi telah berakhir.' });
+    }
+
     await pool.execute(
       'INSERT INTO riwayat_aktivitas (user_id, title, `desc`, icon) VALUES (?, ?, ?, ?)',
       [userId, title, desc || null, icon || null]
@@ -422,9 +428,15 @@ app.get('/api/video', async (req, res) => {
 // Endpoint: Get all website testimonials
 app.get('/api/testimoni', async (req, res) => {
   try {
-    const [rows] = await pool.execute(
-      'SELECT t.*, u.name as user_name, u.avatar as user_avatar FROM testimoni t JOIN users u ON t.user_id = u.id ORDER BY t.created_at DESC'
-    );
+    const { userId } = req.query;
+    let query = 'SELECT t.*, u.name as user_name, u.avatar as user_avatar FROM testimoni t JOIN users u ON t.user_id = u.id';
+    const params = [];
+    if (userId) {
+      query += ' WHERE t.user_id = ?';
+      params.push(userId);
+    }
+    query += ' ORDER BY t.created_at DESC';
+    const [rows] = await pool.execute(query, params);
     res.json(rows);
   } catch (error) {
     console.error('Error fetching testimonials:', error);

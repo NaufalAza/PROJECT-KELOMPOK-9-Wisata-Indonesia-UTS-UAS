@@ -28,18 +28,18 @@ function Detail() {
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
-
   const fetchDestination = async () => {
     try {
       const response = await fetch(`${apiUrl}/destinasi/${destId}`);
       if (response.ok) {
         const data = await response.json();
         setDestination(data);
+        return data;
       }
     } catch (err) {
       console.log("Failed to fetch destination details from MySQL, using defaults", err);
     }
+    return null;
   };
 
   const fetchReviews = async () => {
@@ -74,10 +74,30 @@ function Detail() {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
-      await fetchDestination();
+      const destData = await fetchDestination();
       await fetchReviews();
       await checkFavoriteStatus();
       setLoading(false);
+
+      // Log activity if user is logged in
+      const savedUser = localStorage.getItem("user");
+      if (savedUser && destData) {
+        const user = JSON.parse(savedUser);
+        try {
+          await fetch(`${apiUrl}/riwayat`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              userId: user.id,
+              title: `Melihat destinasi ${destData.name}`,
+              desc: `Membuka detail destinasi ${destData.name} untuk melihat info tiket.`,
+              icon: "eye"
+            })
+          });
+        } catch (e) {
+          console.error("Failed to log view", e);
+        }
+      }
     }
     loadData();
   }, [destId]);
