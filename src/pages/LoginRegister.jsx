@@ -24,43 +24,86 @@ function LoginRegister({ onLogin }) {
   });
 
   // HANDLE SUBMIT
-  const handleSubmit = (e) => {
-
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
     // LOGIN
     if (isLogin) {
+      try {
+        const response = await fetch(`${apiUrl}/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email: formData.email, // works for username or email
+            password: formData.password
+          })
+        });
 
-      alert(
-        `Login Berhasil!\nSelamat datang kembali, ${
-          formData.email || "PRARORO"
-        }!`
-      );
+        const data = await response.json();
 
-      // OPTIONAL LOGIN FUNCTION
-      if (onLogin) onLogin();
+        if (!response.ok) {
+          throw new Error(data.error || "Login gagal!");
+        }
 
-      // PINDAH KE HALAMAN PROFIL
-      navigate("/profil");
+        alert(`Login Berhasil!\nSelamat datang kembali, ${data.user.name}!`);
 
+        // Save session in localStorage
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        if (onLogin) onLogin(data.user);
+
+        // Redirect to profile
+        navigate("/profil");
+      } catch (err) {
+        alert(err.message);
+      }
     }
 
     // REGISTER
     else {
-
       if (formData.password !== formData.confirmPassword) {
-
         alert("Konfirmasi kata sandi tidak cocok!");
-
         return;
       }
 
-      alert(
-        `Registrasi Berhasil!\nAkun Anda dengan email ${formData.email} telah dibuat.`
-      );
+      try {
+        const response = await fetch(`${apiUrl}/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            username: formData.username,
+            email: formData.email,
+            password: formData.password
+          })
+        });
 
-      // KEMBALI KE LOGIN
-      setIsLogin(true);
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Registrasi gagal!");
+        }
+
+        alert("Registrasi Berhasil!\nSilakan masuk dengan akun baru Anda.");
+
+        // Reset form and switch to login view
+        setIsLogin(true);
+        setFormData({
+          name: "",
+          email: "",
+          username: "",
+          password: "",
+          confirmPassword: ""
+        });
+      } catch (err) {
+        alert(err.message);
+      }
     }
   };
 
@@ -278,11 +321,15 @@ function LoginRegister({ onLogin }) {
                   position: "absolute",
                   right: "15px",
                   cursor: "pointer",
-                  fontSize: "18px",
-                  userSelect: "none"
+                  userSelect: "none",
+                  color: "var(--text-light)"
                 }}
               >
-                👁️
+                {showPassword ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.52 13.52 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                )}
               </span>
 
             </div>

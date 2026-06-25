@@ -8,6 +8,29 @@ function Navbar({ isLoggedIn, onLogout }) {
   const location = useLocation();
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const loadUser = () => {
+      const savedUser = localStorage.getItem("user");
+      if (savedUser) {
+        setCurrentUser(JSON.parse(savedUser));
+      } else {
+        setCurrentUser(null);
+      }
+    };
+
+    if (isLoggedIn) {
+      loadUser();
+    } else {
+      setCurrentUser(null);
+    }
+
+    window.addEventListener("user-updated", loadUser);
+    return () => {
+      window.removeEventListener("user-updated", loadUser);
+    };
+  }, [isLoggedIn]);
 
   // Close dropdowns when path changes
   useEffect(() => {
@@ -59,18 +82,6 @@ function Navbar({ isLoggedIn, onLogout }) {
         <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>
           Beranda
         </Link>
-        <Link to="/destinasi" className={`nav-link ${isActive('/destinasi') ? 'active' : ''}`}>
-          Destinasi
-        </Link>
-        <Link to="/kategori" className={`nav-link ${isActive('/kategori') ? 'active' : ''}`}>
-          Kategori
-        </Link>
-        <Link to="/gallery" className={`nav-link ${isActive('/gallery') ? 'active' : ''}`}>
-          Galeri
-        </Link>
-        <Link to="/video" className={`nav-link ${isActive('/video') ? 'active' : ''}`}>
-          Video
-        </Link>
         <Link to="/tentang" className={`nav-link ${isActive('/tentang') ? 'active' : ''}`}>
           Tentang
         </Link>
@@ -97,7 +108,7 @@ function Navbar({ isLoggedIn, onLogout }) {
               onMouseOut={(e) => { e.currentTarget.style.borderColor = 'var(--primary-light)'; }}
             >
               <img 
-                src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcRVx07NtdAoD89i0RWS_JR8yeOoeRijWRMbvjpFRFISeJJStSWf6jArBAWSyhvjod8zf7j-3VW2_AeD9kg" 
+                src={currentUser?.avatar || "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcRVx07NtdAoD89i0RWS_JR8yeOoeRijWRMbvjpFRFISeJJStSWf6jArBAWSyhvjod8zf7j-3VW2_AeD9kg"} 
                 alt="Profile Avatar" 
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
@@ -123,8 +134,8 @@ function Navbar({ isLoggedIn, onLogout }) {
                 }}
               >
                 <div style={{ padding: '8px 20px', borderBottom: '1px solid var(--border)', marginBottom: '8px' }}>
-                  <div style={{ fontWeight: '800', color: 'var(--text-heading)', fontSize: '14px' }}>Praroro</div>
-                  <div style={{ fontSize: '12px', color: 'var(--text-light)' }}>praroro@gmail.com</div>
+                  <div style={{ fontWeight: '800', color: 'var(--text-heading)', fontSize: '14px' }}>{currentUser?.name || "Praroro"}</div>
+                  <div style={{ fontSize: '12px', color: 'var(--text-light)' }}>{currentUser?.email || "praroro@gmail.com"}</div>
                 </div>
 
                 <Link to="/dashboard" style={{ padding: '8px 20px', fontSize: '14px', fontWeight: '600', color: 'var(--text-main)', textAlign: 'left' }} className="dropdown-item-hover">
@@ -177,18 +188,6 @@ function Navbar({ isLoggedIn, onLogout }) {
         <Link to="/" className={`mobile-link ${isActive('/') ? 'active' : ''}`}>
           Beranda
         </Link>
-        <Link to="/destinasi" className={`mobile-link ${isActive('/destinasi') ? 'active' : ''}`}>
-          Destinasi
-        </Link>
-        <Link to="/kategori" className={`mobile-link ${isActive('/kategori') ? 'active' : ''}`}>
-          Kategori
-        </Link>
-        <Link to="/gallery" className={`mobile-link ${isActive('/gallery') ? 'active' : ''}`}>
-          Galeri
-        </Link>
-        <Link to="/video" className={`mobile-link ${isActive('/video') ? 'active' : ''}`}>
-          Video
-        </Link>
         <Link to="/tentang" className={`mobile-link ${isActive('/tentang') ? 'active' : ''}`}>
           Tentang
         </Link>
@@ -199,7 +198,7 @@ function Navbar({ isLoggedIn, onLogout }) {
         {isLoggedIn ? (
           <div style={{ borderTop: '1px solid var(--border)', paddingTop: '15px', marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <div style={{ padding: '0 12px', fontSize: '13px', color: 'var(--text-light)' }}>
-              Akun: <strong>Haikal Maulana</strong>
+              Akun: <strong>{currentUser?.name || "Haikal Maulana"}</strong>
             </div>
             <Link to="/dashboard" className="mobile-link"> Dashboard</Link>
             <Link to="/profil" className="mobile-link"> Profil Saya</Link>

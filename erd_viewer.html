@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viewer ERD - Wisata Indonesia</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #334155;
+      --text-heading: #0f172a;
+      --border: #e2e8f0;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      max-width: 700px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 10px;
+      letter-spacing: -0.025em;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    .btn-container {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-secondary {
+      background-color: white;
+      color: var(--text-heading);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background-color: #f1f5f9;
+      transform: translateY(-2px);
+    }
+
+    .viewer-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 40px;
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      margin-bottom: 40px;
+    }
+
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* Customizing Mermaid ERD aesthetics via SVG styles */
+    .mermaid svg {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+
+    footer {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      margin-top: auto;
+    }
+
+    /* Loading indicator */
+    #loading {
+      font-weight: 600;
+      color: var(--accent);
+      padding: 40px;
+    }
+  </style>
+
+  <!-- Mermaid.js Library CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'neutral',
+      securityLevel: 'loose',
+      er: {
+        useMaxWidth: false,
+        graphHeight: 600,
+        layoutDirection: 'TB'
+      }
+    });
+  </script>
+</head>
+<body>
+
+  <header>
+    <h1>Viewer Arsitektur & ERD</h1>
+    <p>Visualisasi Alur Staging Halaman dan Entity Relationship Diagram aplikasi Wisata Indonesia. Buka halaman ini di browser Anda dan klik tombol di bawah untuk mengunduh diagram ERD sebagai gambar.</p>
+  </header>
+
+  <!-- SECTION 1: PAGE FLOW (STAGING) -->
+  <h2 style="margin: 20px 0 15px; font-weight: 800; font-size: 1.6rem; color: var(--text-heading); text-align: center;">
+    1. Alur Sistem Aplikasi (Staging Halaman)
+  </h2>
+  <div class="viewer-card" style="padding: 30px; margin-bottom: 30px;">
+    <div id="loading-flow" style="font-weight: 600; color: var(--accent); padding: 20px;">Memuat alur halaman...</div>
+    <div class="mermaid" id="flow-mermaid-container" style="display: none; width: 100%;">
+graph TD
+    subgraph STAGE_1 ["HALAMAN 1: ENTRY - Pintu Masuk"]
+        Home["Beranda / Home"]
+        Login["Login / Register"]
+        Kontak["Kontak Kami"]
+        Tentang["Tentang Kami"]
+    end
+
+    subgraph STAGE_2 ["HALAMAN 2: PROSES - Eksplorasi & Pengelolaan"]
+        Destinasi["Katalog Destinasi"]
+        Galeri["Galeri Foto"]
+        Kategori["Kategori Wisata"]
+        Dashboard["Dashboard Pengguna"]
+        Profil["Profil Pengguna"]
+    end
+
+    subgraph STAGE_3 ["HALAMAN 3: OUTPUT - Interaksi & Hasil"]
+        Detail["Detail Wisata & Ulasan"]
+        Video["Video Sinematik"]
+        Testimoni["Testimoni Pengunjung"]
+        Favorit["Daftar Favorit"]
+        Riwayat["Riwayat Aktivitas"]
+    end
+
+    STAGE_1 -->|Eksplorasi| STAGE_2
+    STAGE_2 -->|Log Aktivitas| STAGE_3
+    </div>
+  </div>
+
+  <!-- SECTION 2: DATABASE ERD -->
+  <h2 style="margin: 30px 0 10px; font-weight: 800; font-size: 1.6rem; color: var(--text-heading); text-align: center;">
+    2. Diagram Hubungan Entitas (ERD Database)
+  </h2>
+  
+  <div class="btn-container">
+    <button class="btn btn-primary" onclick="downloadPNG()">
+      📥 Simpan ERD sebagai Gambar (PNG)
+    </button>
+    <button class="btn btn-secondary" onclick="downloadSVG()">
+      🌐 Simpan ERD sebagai Vektor (SVG)
+    </button>
+  </div>
+
+  <div class="viewer-card">
+    <div id="loading-erd" style="font-weight: 600; color: var(--accent); padding: 40px;">Memuat diagram ERD...</div>
+    <div class="mermaid" id="erd-mermaid-container" style="display: none; width: 100%;">
+erDiagram
+    USERS {
+        int id PK
+        string name
+        string username
+        string email
+        string password
+        string phone
+        string location
+        string avatar
+        datetime join_date
+    }
+    KATEGORI {
+        string id PK
+        string name
+        string circle_class
+    }
+    DESTINASI {
+        string id PK
+        string name
+        string location
+        string category_id FK
+        decimal rating
+        int reviews_count
+        string price
+        string hours
+        string badge
+        string image
+        text deskripsi
+    }
+    FAVORIT {
+        int id PK
+        int user_id FK
+        string destination_id FK
+        datetime created_at
+    }
+    ULASAN_DESTINASI {
+        int id PK
+        int user_id FK
+        string destination_id FK
+        int stars
+        text comment
+        datetime created_at
+    }
+    PEMESANAN_TIKET {
+        int id PK
+        int user_id FK
+        string destination_id FK
+        date booking_date
+        date visit_date
+        int ticket_qty
+        decimal total_price
+        string status
+        datetime created_at
+    }
+    RIWAYAT_AKTIVITAS {
+        int id PK
+        int user_id FK
+        string title
+        text deskripsi
+        string icon
+        datetime created_at
+    }
+    TESTIMONI {
+        int id PK
+        int user_id FK
+        int stars
+        text isi_testimoni
+        datetime created_at
+    }
+    KONTAK {
+        int id PK
+        string name
+        string email
+        text message
+        datetime created_at
+    }
+    VIDEO {
+        int id PK
+        string judul
+        string tag
+        string link
+        text deskripsi
+        string destination_id FK
+    }
+    GALLERY {
+        int id PK
+        string nama
+        string lokasi
+        string gambar
+        string destination_id FK
+    }
+
+    USERS ||--o{ FAVORIT : "memiliki"
+    DESTINASI ||--o{ FAVORIT : "disimpan di"
+    KATEGORI ||--o{ DESTINASI : "mengelompokkan"
+    USERS ||--o{ RIWAYAT_AKTIVITAS : "melakukan"
+    USERS ||--o{ TESTIMONI : "menulis"
+    DESTINASI ||--o{ VIDEO : "memiliki"
+    DESTINASI ||--o{ GALLERY : "memiliki"
+    USERS ||--o{ ULASAN_DESTINASI : "menulis"
+    DESTINASI ||--o{ ULASAN_DESTINASI : "menerima"
+    USERS ||--o{ PEMESANAN_TIKET : "melakukan"
+    DESTINASI ||--o{ PEMESANAN_TIKET : "dipesan"
+    </div>
+  </div>
+
+  <footer>
+    Explore Nusantara &copy; 2026 - Kelompok 9
+  </footer>
+
+  <script>
+    // Hide loading after mermaid renders
+    document.addEventListener("DOMContentLoaded", () => {
+      // Mermaid renders asynchronously
+      setTimeout(() => {
+        // Flow diagram
+        const loadingFlow = document.getElementById('loading-flow');
+        const containerFlow = document.getElementById('flow-mermaid-container');
+        if (loadingFlow) loadingFlow.style.display = 'none';
+        if (containerFlow) containerFlow.style.display = 'flex';
+
+        // ERD diagram
+        const loadingErd = document.getElementById('loading-erd');
+        const containerErd = document.getElementById('erd-mermaid-container');
+        if (loadingErd) loadingErd.style.display = 'none';
+        if (containerErd) containerErd.style.display = 'flex';
+      }, 800);
+    });
+
+    function getSVGElement() {
+      const svg = document.querySelector('#erd-mermaid-container svg');
+      if (!svg) {
+        alert("Diagram belum selesai dimuat. Silakan tunggu sebentar.");
+        return null;
+      }
+      return svg;
+    }
+
+    function downloadSVG() {
+      const svgEl = getSVGElement();
+      if (!svgEl) return;
+
+      const svgString = new XMLSerializer().serializeToString(svgEl);
+      const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+      const svgUrl = URL.createObjectURL(svgBlob);
+      
+      const downloadLink = document.createElement('a');
+      downloadLink.href = svgUrl;
+      downloadLink.download = 'erd_wisata_indonesia.svg';
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
+
+    function downloadPNG() {
+      const svgEl = getSVGElement();
+      if (!svgEl) return;
+
+      const svgString = new XMLSerializer().serializeToString(svgEl);
+      const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+      const blobURL = URL.createObjectURL(svgBlob);
+      
+      const image = new Image();
+      image.onload = () => {
+        const canvas = document.createElement('canvas');
+        
+        // Scale factor for high-resolution PNG
+        const scale = 2;
+        const width = svgEl.getBoundingClientRect().width || 1200;
+        const height = svgEl.getBoundingClientRect().height || 800;
+        
+        canvas.width = width * scale;
+        canvas.height = height * scale;
+        
+        const context = canvas.getContext('2d');
+        // Background color
+        context.fillStyle = '#ffffff';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Scale drawing context
+        context.scale(scale, scale);
+        context.drawImage(image, 0, 0, width, height);
+        
+        const png = canvas.toDataURL('image/png');
+        
+        const downloadLink = document.createElement('a');
+        downloadLink.href = png;
+        downloadLink.download = 'erd_wisata_indonesia.png';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      };
+      image.src = blobURL;
+    }
+  </script>
+</body>
+</html>

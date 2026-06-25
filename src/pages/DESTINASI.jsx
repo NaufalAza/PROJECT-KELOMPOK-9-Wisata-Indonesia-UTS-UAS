@@ -25,8 +25,8 @@ function Destinasi() {
 
   }, [kategoriURL]);
 
-  // DATA DESTINASI
-  const destinations = [
+  // DATA DESTINASI DUMMY FALLBACK
+  const dummyDestinations = [
 
     {
       id: "bali",
@@ -71,6 +71,37 @@ function Destinasi() {
     },
 
   ];
+
+  const [destinations, setDestinations] = useState(dummyDestinations);
+
+  useEffect(() => {
+    async function getDestinations() {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+        const response = await fetch(`${apiUrl}/destinasi`);
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+        
+        if (data && data.length > 0) {
+          const mapped = data.map(item => ({
+            id: item.id,
+            name: item.name,
+            location: item.location,
+            category: item.category_id,
+            rating: item.rating ? item.rating.toString() : "0.0",
+            price: item.price || "Gratis",
+            badge: item.badge,
+            image: item.image,
+            desc: item.desc
+          }));
+          setDestinations(mapped);
+        }
+      } catch (err) {
+        console.log("Using dummy data for Destinasi. (Local server might not be running or connection failed)", err.message);
+      }
+    }
+    getDestinations();
+  }, []);
 
   // FILTER DESTINASI
   const filteredDestinations =
@@ -175,8 +206,8 @@ function Destinasi() {
                 {/* CONTENT */}
                 <div className="card-content">
 
-                  <div className="card-location">
-                    <span>📍</span>
+                  <div className="card-location" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--primary)', flexShrink: 0 }}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                     {dest.location}
                   </div>
 
@@ -195,7 +226,7 @@ function Destinasi() {
                     </span>
 
                     <Link
-                      to="/detail"
+                      to={`/detail?id=${dest.id}`}
                       className="btn-detail"
                     >
                       Jelajahi <span>→</span>

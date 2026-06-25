@@ -40,7 +40,7 @@
 }
 
 .contact-card {
-  background: white;
+  background: rgb(255, 255, 255);
   padding: 30px;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
@@ -61,7 +61,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: rgba(15, 118, 110, 0.1);
+  background: rgba(254, 255, 255, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,7 +86,7 @@
 
 /* Contact Form */
 .contact-form-container {
-  background: white;
+  background: rgb(255, 255, 255);
   padding: 40px;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
@@ -140,7 +140,7 @@
 
 .btn-contact-submit {
   background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  color: white;
+  color: rgb(0, 0, 0);
   border: none;
   padding: 14px;
   border-radius: 30px;

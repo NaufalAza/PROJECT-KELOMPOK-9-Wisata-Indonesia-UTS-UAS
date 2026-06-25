@@ -17,13 +17,16 @@ import Favorit from "./pages/FAVORIT";
 import Riwayat from "./pages/RIWAYAT";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return localStorage.getItem("user") !== null;
+  });
 
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
 
   const handleLogout = () => {
+    localStorage.removeItem("user");
     setIsLoggedIn(false);
   };
 
