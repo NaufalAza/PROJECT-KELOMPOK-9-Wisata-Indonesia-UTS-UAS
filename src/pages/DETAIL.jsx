@@ -27,6 +27,7 @@ function Detail() {
   const [stars, setStars] = useState(5);
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(true);
+  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
   const fetchDestination = async () => {
     try {
