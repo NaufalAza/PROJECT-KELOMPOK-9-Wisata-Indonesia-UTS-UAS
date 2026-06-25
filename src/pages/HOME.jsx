@@ -77,8 +77,7 @@ function Home() {
       <div
         className="hero-section"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600&auto=format&fit=crop')"
+          backgroundImage: "url('/Beranda/beranda.jpg')"
         }}
       >
 
