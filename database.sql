@@ -147,12 +147,11 @@ INSERT INTO kategori (id, name, circle_class) VALUES
 ('pantai', 'Pantai & Laut', 'bg-teal-light'),
 ('gunung', 'Gunung & Alam', 'bg-orange-light'),
 ('budaya', 'Budaya & Sejarah', 'bg-blue-light');
-
 -- Insert Destinasi
 INSERT INTO destinasi (id, name, location, category_id, rating, reviews_count, price, hours, badge, image, `desc`) VALUES
-('bali', 'Bali', 'Bali', 'pantai', 4.9, 128, 'Rp 20.000', '24 Jam', 'Pantai & Pura', 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=500', 'Menyuguhkan pesona pantai berpasir putih, tempat berselancar kelas dunia, serta keunikan budaya tari kecak.'),
-('raja-ampat', 'Raja Ampat', 'Papua Barat', 'pantai', 5.0, 42, 'Rp 500.000', '08.00 - 18.00', 'Diving Paradiso', 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?q=80&w=500', 'Kepulauan karst menawan di Papua Barat. Tempat impian bagi penyelam di seluruh dunia dengan kekayaan biota laut terlengkap.'),
-('bromo', 'Gunung Bromo', 'Jawa Timur', 'gunung', 4.8, 85, 'Rp 29.000', '03.00 - 17.00', 'Gunung Berapi', 'https://images.unsplash.com/photo-1604999333679-b86d54738315?q=80&w=500', 'Kawah vulkanik aktif yang dikelilingi hamparan pasir luas bertajuk Pasir Berbisik. Sangat pas untuk melihat sunrise.');
+('bali', 'Bali', 'Bali', 'pantai', 4.9, 128, 'Rp 20.000', '24 Jam', 'Pantai & Pura', '/Galeri/Bali.jpg', 'Menyuguhkan pesona pantai berpasir putih, tempat berselancar kelas dunia, serta keunikan budaya tari kecak.'),
+('raja-ampat', 'Raja Ampat', 'Papua Barat', 'pantai', 5.0, 42, 'Rp 500.000', '08.00 - 18.00', 'Diving Paradiso', '/Galeri/Raja Ampat.jpg', 'Kepulauan karst menawan di Papua Barat. Tempat impian bagi penyelam di seluruh dunia dengan kekayaan biota laut terlengkap.'),
+('bromo', 'Gunung Bromo', 'Jawa Timur', 'gunung', 4.8, 85, 'Rp 29.000', '03.00 - 17.00', 'Gunung Berapi', '/Galeri/Bromo.jpeg', 'Kawah vulkanik aktif yang dikelilingi hamparan pasir luas bertajuk Pasir Berbisik. Sangat pas untuk melihat sunrise.');
 
 -- Insert Favorit
 INSERT INTO favorit (user_id, destination_id) VALUES

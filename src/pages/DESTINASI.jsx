@@ -37,7 +37,7 @@ function Destinasi() {
       price: "Rp 1.5M - 5M",
       badge: "Pantai & Pura",
       image:
-        "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=500&auto=format&fit=crop",
+        "/Galeri/Bali.jpg",
       desc:
         "Menyuguhkan pesona pantai berpasir putih, tempat berselancar kelas dunia, serta keunikan budaya tari kecak."
     },
@@ -51,7 +51,7 @@ function Destinasi() {
       price: "Rp 3M - 8M",
       badge: "Diving Paradiso",
       image:
-        "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?q=80&w=500&auto=format&fit=crop",
+        "/Galeri/Raja Ampat.jpg",
       desc:
         "Kepulauan karst menawan di Papua Barat. Tempat impian bagi penyelam di seluruh dunia dengan kekayaan biota laut terlengkap."
     },
@@ -65,7 +65,7 @@ function Destinasi() {
       price: "Rp 500rb - 1.5M",
       badge: "Gunung Berapi",
       image:
-        "https://images.unsplash.com/photo-1604999333679-b86d54738315?q=80&w=500&auto=format&fit=crop",
+        "/Galeri/Bromo.jpeg",
       desc:
         "Kawah vulkanik aktif yang dikelilingi hamparan pasir luas bertajuk Pasir Berbisik. Sangat pas untuk melihat sunrise."
     },

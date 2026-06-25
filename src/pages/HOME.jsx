@@ -3,40 +3,33 @@ import { Link } from "react-router-dom";
 import "../styles/home.css";
 
 function Home() {
-
   const dummyDestinations = [
     {
       id: "bali",
       name: "Bali",
       location: "Pulau Dewata",
-      image:
-        "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=600&auto=format&fit=crop",
+      image: "/Galeri/Bali.jpg",
       badge: "Terpopuler",
       rating: "4.9",
-      desc:
-        "Pulau Dewata menawarkan pantai eksotis, pura megah di atas tebing, dan kehidupan budaya spiritual yang kental."
+      desc: "Pulau Dewata menawarkan pantai eksotis, pura megah di atas tebing, dan kehidupan budaya spiritual yang kental."
     },
     {
       id: "bromo",
       name: "Gunung Bromo",
       location: "Jawa Timur",
-      image:
-        "https://images.unsplash.com/photo-1604999333679-b86d54738315?q=80&w=600&auto=format&fit=crop",
+      image: "/Galeri/Bromo.jpeg",
       badge: "Gunung",
       rating: "4.8",
-      desc:
-        "Gunung Bromo menawarkan pemandangan sunrise yang indah dengan hamparan pasir luas dan pegunungan eksotis."
+      desc: "Gunung Bromo menawarkan pemandangan sunrise yang indah dengan hamparan pasir luas dan pegunungan eksotis."
     },
     {
       id: "raja-ampat",
       name: "Raja Ampat",
       location: "Papua Barat",
-      image:
-        "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?q=80&w=600&auto=format&fit=crop",
+      image: "/Galeri/Raja Ampat.jpg",
       badge: "Laut & Diving",
       rating: "5.0",
-      desc:
-        "Raja Ampat terkenal dengan keindahan lautnya yang jernih, pulau karst eksotis, dan surga diving terbaik dunia."
+      desc: "Raja Ampat terkenal dengan keindahan lautnya yang jernih, pulau karst eksotis, dan surga diving terbaik dunia."
     }
   ];
 

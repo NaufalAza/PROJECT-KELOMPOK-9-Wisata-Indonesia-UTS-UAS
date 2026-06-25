@@ -13,7 +13,7 @@ function Detail() {
   const [destination, setDestination] = useState({
     name: "Pantai Tanah Lot",
     location: "Bali, Indonesia",
-    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=1200&auto=format&fit=crop",
+    image: "/Galeri/Bali.jpg",
     rating: "4.9",
     reviews_count: 1200,
     desc: "Tanah Lot adalah pura laut yang berada di atas batu karang besar di tepi laut. Tempat ini menjadi salah satu ikon wisata Bali yang paling terkenal. Keunikan utama pura ini terletak pada lokasinya yang menjorok ke laut, sehingga saat air pasang pura akan terlihat terisolasi di tengah lautan luas.",
